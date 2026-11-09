@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: WoW Logs AS
+## Notes: Records run data for Azeroth Survivors so a run can be analysed on WoW Logs. Read-only and local: nothing leaves your game unless you upload it yourself.
+## Author: Rksdevs (Inno)
+## Version: 0.2.2
+## SavedVariables: WowLogsASDB
+
+Util.lua
+Recorder.lua
+Export.lua
+Core.lua

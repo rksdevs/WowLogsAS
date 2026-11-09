@@ -1,0 +1,24 @@
+name: Release
+on:
+  push:
+    branches: [main]
+    paths: ['*.toc']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish the version in the toc, if it is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(grep -m1 '^## Version:' WowLogsAS.toc | sed 's/^## Version:[[:space:]]*//' | tr -d '\r')
+          [ -n "$VER" ] || { echo "No version in WowLogsAS.toc"; exit 1; }
+          TAG="v$VER"
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "$TAG already released"; exit 0; fi
+          mkdir -p /tmp/pkg/WowLogsAS
+          cp WowLogsAS.toc *.lua README.md CHANGELOG.md /tmp/pkg/WowLogsAS/
+          (cd /tmp/pkg && zip -qr "$GITHUB_WORKSPACE/WowLogsAS-$TAG.zip" WowLogsAS)
+          gh release create "$TAG" "WowLogsAS-$TAG.zip" --title "WoW Logs AS $TAG" --notes-file RELEASE_NOTES.md --target "$GITHUB_SHA"

@@ -1,0 +1,16 @@
+# Release zips are built by .github/workflows/release.yml from the pushed commit. Never commit them.
+*.zip
+
+# Local tools (the tests run with fengari from a folder outside the repo).
+node_modules/
+
+# A copy of the saved data. It holds your runs, and co-op runs can hold companions' names.
+WowLogsAS.lua
+*.lua.bak
+
+# OS and editor files.
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

@@ -1,0 +1,1 @@
+WoW Logs AS 0.2.2 records a full combat report for each run: damage and healing by source, damage taken, pets and summons, boss fights, misses, timelines and a plain end-of-run build list. It records locally and sends nothing anywhere. This is still a test build, so the saved format may change.
